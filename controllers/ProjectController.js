@@ -15,6 +15,10 @@ class ProjectController {
         personalFeedback,
       } = req.body;
       const { img } = req.files;
+
+      if (!req.files || !req.files.img) {
+        return res.status(400).json({ message: 'No file uploaded' });
+      }
       let fileName = v4() + '.jpg';
       img.mv(path.resolve(__dirname, '..', 'static', fileName));
 
